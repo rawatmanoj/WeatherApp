@@ -2,20 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 body {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(rgb(115, 203, 214), rgb(68, 152, 163));
+  background: rgb(115, 203, 214);
   font-family: sans-serif;
   color: white;
 }
 
-.location,
+/* .location,
 .temperature {
   height: 30vh;
   width: 50%;
@@ -38,4 +39,32 @@ body {
 }
 .degree-section h2 {
   font-size: 40px;
+} */
+
+.location {
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  color: white;
+  font-size: 3rem;
+  border: 0;
+  width: 40rem;
+  border-bottom: 0.1rem solid white;
+  height: 4.2rem;
+  background-color: rgb(115, 203, 214);
+}
+
+.search-icon {
+  margin: 1.5rem;
+  font-size: 3.5rem !important;
+  color: white;
+}
+
+.search:focus {
+  outline: none;
 }
