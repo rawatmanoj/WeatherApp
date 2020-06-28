@@ -61,3 +61,123 @@
 //     return skycons.set(iconId, Skycons[currentIcon]);
 //   }
 // });
+
+let temperatureDescrtiption = document.querySelector(".info");
+let temperatureDegree = document.querySelector(".temperature");
+let locations = document.querySelector(".location");
+let time = document.querySelector(".time");
+
+window.addEventListener("load", () => {
+  fetchDefaultTemp();
+});
+
+function fetchDefaultTemp() {
+  console.log("hello");
+  const key = "c27f547d1a6936c2e4f12912db69dbb1";
+  let url = "http://api.openweathermap.org/data/2.5/weather?";
+
+  const api = fetch(`${url}q=Delhi&units=imperial&appid=${key}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      locations.textContent = data.name + ", " + data.sys.country;
+      getIcon(data.weather[0].icon);
+      temperatureDegree.textContent = Math.round(data.main.temp);
+      getTime();
+    });
+}
+
+function getIcon(data) {
+  let time = document.getElementById("temp-icon");
+
+  switch (data) {
+    // day
+    case "01d":
+      time.className = "wi wi-day-sunny";
+      break;
+    case "02d":
+      time.className = "wi wi-day-cloudy";
+
+      break;
+    case "03d":
+      time.className = "wi wi-cloud";
+
+      break;
+    case "04d":
+      time.className = "wi wi-cloudy";
+
+      break;
+    case "09d":
+      time.className = "wi wi-day-rain";
+
+      break;
+    case "10d":
+      time.className = "wi wi-day-sunny";
+      time.addClass("wi wi-day-rain-mix");
+      break;
+    case "11d":
+      time.className = "wi wi-day-lightning";
+
+      break;
+    case "13d":
+      time.className = "wi wi-day-snow-wind";
+
+      break;
+    case "50d":
+      time.className = "wi wi-day-sunny";
+
+      break;
+    // night
+    case "01n":
+      time.className = "wi wi-night-clear";
+
+      break;
+    case "02n":
+      time.className = "wi wi-night-alt-cloudy";
+
+      break;
+    case "03n":
+      time.className = "wi wi-cloud";
+
+      break;
+    case "04n":
+      time.className = "wi wi-cloudy";
+
+      break;
+    case "09n":
+      time.className = "wi wi-showers";
+
+      break;
+    case "10n":
+      time.className = "wi wi-night-alt-showers";
+
+      break;
+    case "11n":
+      time.className = "wi wi-storm-showers";
+
+      break;
+    case "13n":
+      time.className = "wi wi-wi-night-alt-snow";
+
+      break;
+    case "50n":
+      time.className = "wi wi-fog";
+
+      break;
+  }
+}
+
+function getTime() {
+  let d = new Date(); // for now
+  let hours = d.getHours(); // => 9
+  let mins = d.getMinutes(); // =>  30
+  let secs = d.getSeconds(); // => 51
+
+  if (hours > 12) {
+    hours = hours - 12;
+    time.textContent = `${hours}:${mins} PM`;
+  } else {
+    time.textContent = `${hours}:${mins} AM`;
+  }
+  console.log(hours, mins, secs);
+}
