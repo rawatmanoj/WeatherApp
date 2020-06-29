@@ -66,25 +66,62 @@ let temperatureDescrtiption = document.querySelector(".info");
 let temperatureDegree = document.querySelector(".temperature");
 let locations = document.querySelector(".location");
 let time = document.querySelector(".time");
+let wind = document.querySelector(".wind");
+let humidity = document.querySelector(".humidity");
+let weather = document.querySelector(".weather");
+let search = document.querySelector(".search-form");
+let searchInput = document.querySelector(".search");
+let error = document.querySelector(".show-error");
 
 window.addEventListener("load", () => {
   fetchDefaultTemp();
+  search.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    fetchTemp(searchInput.value);
+    console.log(searchInput.value);
+  });
 });
 
-function fetchDefaultTemp() {
-  console.log("hello");
+function fetchTemp(val) {
   const key = "c27f547d1a6936c2e4f12912db69dbb1";
   let url = "http://api.openweathermap.org/data/2.5/weather?";
 
-  const api = fetch(`${url}q=Delhi&units=imperial&appid=${key}`)
+  fetch(`${url}q=${val}&units=metric&appid=${key}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
       locations.textContent = data.name + ", " + data.sys.country;
       getIcon(data.weather[0].icon);
       temperatureDegree.textContent = Math.round(data.main.temp);
+      weather.textContent = data.weather[0].main;
+      humidity.textContent = "Humidity: " + data.main.humidity;
+      wind.textContent = "Wind: " + data.wind.speed + " mph";
       getTime();
+    })
+    .catch((err) => {
+      error.textContent = "something went wrong!";
+      console.log(err);
     });
+}
+
+function fetchDefaultTemp() {
+  const key = "c27f547d1a6936c2e4f12912db69dbb1";
+  let url = "http://api.openweathermap.org/data/2.5/weather?";
+
+  fetch(`${url}q=Delhi&units=metric&appid=${key}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      locations.textContent = data.name + ", " + data.sys.country;
+      getIcon(data.weather[0].icon);
+      temperatureDegree.textContent = Math.round(data.main.temp);
+      weather.textContent = data.weather[0].main;
+      humidity.textContent = "Humidity: " + data.main.humidity;
+      wind.textContent = "Wind: " + data.wind.speed + " mph";
+      getTime();
+    })
+    .catch((err) => console.log(err));
 }
 
 function getIcon(data) {

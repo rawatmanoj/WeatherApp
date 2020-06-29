@@ -36,22 +36,38 @@
     <div class="container">
       <div class="top-part">
         <img class="svg-icon" src="./icons/search.svg" />
-        <input
-          type="text"
-          placeholder="Search by name or zip code"
-          class="search"
-        />
+        <form class="search-form">
+          <input
+            type="text"
+            placeholder="Search by name or zip code"
+            class="search"
+          />
+        </form>
       </div>
+      <div class="show-error"></div>
       <div class="mid-part">
         <div class="location mid-part-info"></div>
         <div class="time mid-part-info">Time</div>
         <div class="mid-part-temp">
           <i id="temp-icon"></i>
           <div class="temperature"></div>
-          <span class="unit">°F</span>
+          <span class="unit">°C</span>
         </div>
 
-        <div class="info mid-part-info">Info</div>
+        <div class="info mid-part-info">
+          <div style="font-size: 1.4rem;" class="weather"></div>
+          <div style="font-size: 1.6rem;" class="humidity"></div>
+          <div style="font-size: 1.8rem;" class="wind"></div>
+        </div>
+      </div>
+      <div class="lower-part">
+        <div class="week-forecast">
+          <div class="mon"><div></div></div>
+          <div class="tue"><div></div></div>
+          <div class="wed"><div></div></div>
+          <div class="thurs"><div></div></div>
+          <div class="fri"><div></div></div>
+        </div>
       </div>
     </div>
     <script src="skycons.js"></script>
