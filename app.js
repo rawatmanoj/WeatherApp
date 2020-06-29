@@ -72,7 +72,7 @@ let weather = document.querySelector(".weather");
 let search = document.querySelector(".search-form");
 let searchInput = document.querySelector(".search");
 let error = document.querySelector(".show-error");
-
+const proxy = "https://cors-anywhere.herokuapp.com/";
 window.addEventListener("load", () => {
   fetchDefaultTemp();
   search.addEventListener("submit", (e) => {
@@ -85,7 +85,7 @@ window.addEventListener("load", () => {
 
 function fetchTemp(val) {
   const key = "c27f547d1a6936c2e4f12912db69dbb1";
-  let url = "http://api.openweathermap.org/data/2.5/weather?";
+  let url = `https://api.openweathermap.org/data/2.5/weather?`;
 
   fetch(`${url}q=${val}&units=metric&appid=${key}`)
     .then((res) => res.json())
@@ -107,7 +107,7 @@ function fetchTemp(val) {
 
 function fetchDefaultTemp() {
   const key = "c27f547d1a6936c2e4f12912db69dbb1";
-  let url = "http://api.openweathermap.org/data/2.5/weather?";
+  let url = "https://api.openweathermap.org/data/2.5/weather?";
 
   fetch(`${url}q=Delhi&units=metric&appid=${key}`)
     .then((res) => res.json())
